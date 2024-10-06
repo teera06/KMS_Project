@@ -6,10 +6,13 @@
 #include "framework.h"
 #include "KMS_MFC_project.h"
 #include "KMS_MFC_projectDlg.h"
+
+#include <iostream>
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
+#pragma comment(linker, "/entry:WinmainCRTStartup /subsystem:console") // 디버그 모드일때 콘솔창 사용
 #endif
 
 
@@ -52,6 +55,7 @@ END_MESSAGE_MAP()
 
 CKMSMFCprojectDlg::CKMSMFCprojectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_KMS_MFC_PROJECT_DIALOG, pParent)
+	, m_nNum(100)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -59,12 +63,14 @@ CKMSMFCprojectDlg::CKMSMFCprojectDlg(CWnd* pParent /*=nullptr*/)
 void CKMSMFCprojectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
+	DDX_Text(pDX, IDC_EDIT_NUM, m_nNum);
 }
 
 BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+	ON_BN_CLICKED(IDC_BUTTON1, &CKMSMFCprojectDlg::OnBnClickedButton1)
 END_MESSAGE_MAP()
 
 
@@ -153,3 +159,22 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CKMSMFCprojectDlg::OnBnClickedButton1()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//AfxMessageBox(_T("hellow Windos"));
+	UpdateData(true); // 수정된 값 처리
+	
+	int nSum = 0;
+
+	for (int i = 0; i < m_nNum; i++)
+	{
+		std::cout << i << "\n";
+		nSum += i;
+	}
+
+	m_nNum = nSum;
+	UpdateData(false); // 이걸 해줘야 업데이트 됨
+}
