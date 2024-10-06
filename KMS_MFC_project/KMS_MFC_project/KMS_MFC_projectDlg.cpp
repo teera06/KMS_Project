@@ -8,6 +8,8 @@
 #include "KMS_MFC_projectDlg.h"
 
 #include <iostream>
+#include "stringHelper.h"
+
 #include "afxdialogex.h"
 
 #ifdef _DEBUG

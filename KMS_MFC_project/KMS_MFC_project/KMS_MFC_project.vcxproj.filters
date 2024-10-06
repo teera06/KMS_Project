@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="AddClass">
+      <UniqueIdentifier>{03401efb-ca1f-49fe-ba05-2da7deb75e98}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KMS_MFC_project.h">
@@ -33,6 +36,9 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="StringHelper.h">
+      <Filter>AddClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KMS_MFC_project.cpp">
@@ -44,11 +50,14 @@
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="StringHelper.cpp">
+      <Filter>AddClass</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="KMSMFCproject.rc">
+    <Image Include="res\KMS_MFC_project.ico">
       <Filter>리소스 파일</Filter>
-    </ResourceCompile>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\KMSMFCproject.rc2">
@@ -56,8 +65,8 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\KMS_MFC_project.ico">
+    <ResourceCompile Include="KMSMFCproject.rc">
       <Filter>리소스 파일</Filter>
-    </Image>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
