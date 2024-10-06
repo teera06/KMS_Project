@@ -175,6 +175,9 @@ void CKMSMFCprojectDlg::OnBnClickedButton1()
 		nSum += i;
 	}
 
+	SetDlgItemText(IDC_STATIC_RESULT, _T("0"));
 	m_nNum = nSum;
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 }
+
+
