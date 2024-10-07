@@ -9,6 +9,7 @@
 
 #include <iostream>
 #include "stringHelper.h"
+#include "DebugHelper.h"
 
 #include "afxdialogex.h"
 
@@ -193,6 +194,12 @@ void CKMSMFCprojectDlg::OnBnClickedX1y1Input()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	UpdateData(true); // 수정된 값 처리
+
+	if (m_nx1 == 0)
+	{
+		//MsgBoxLog("값이 0입니다.");
+		AfxMessageBox(_T("hellow Windos"));
+	}
 
 	std::cout << "X1 : " << m_nx1 <<", Y1 : "<< m_ny1<<"\n";
 

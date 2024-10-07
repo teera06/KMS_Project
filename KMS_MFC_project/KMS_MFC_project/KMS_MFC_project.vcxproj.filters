@@ -39,6 +39,9 @@
     <ClInclude Include="StringHelper.h">
       <Filter>AddClass</Filter>
     </ClInclude>
+    <ClInclude Include="DebugHelper.h">
+      <Filter>AddClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KMS_MFC_project.cpp">
@@ -51,6 +54,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="StringHelper.cpp">
+      <Filter>AddClass</Filter>
+    </ClCompile>
+    <ClCompile Include="DebugHelper.cpp">
       <Filter>AddClass</Filter>
     </ClCompile>
   </ItemGroup>

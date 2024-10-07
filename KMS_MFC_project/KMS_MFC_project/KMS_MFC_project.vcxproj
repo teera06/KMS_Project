@@ -183,6 +183,7 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="DebugHelper.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="KMS_MFC_project.h" />
     <ClInclude Include="KMS_MFC_projectDlg.h" />
@@ -192,6 +193,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="DebugHelper.cpp" />
     <ClCompile Include="KMS_MFC_project.cpp" />
     <ClCompile Include="KMS_MFC_projectDlg.cpp" />
     <ClCompile Include="pch.cpp">
