@@ -65,14 +65,15 @@ CKMSMFCprojectDlg::CKMSMFCprojectDlg(CWnd* pParent /*=nullptr*/)
 void CKMSMFCprojectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	DDX_Text(pDX, IDC_EDIT_NUM, m_nNum);
+	//DDX_Text(pDX, IDC_EDIT_NUM, m_nNum);
 }
 
 BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	ON_BN_CLICKED(IDC_BUTTON1, &CKMSMFCprojectDlg::OnBnClickedButton1)
+	//ON_BN_CLICKED(IDC_BUTTON1, &CKMSMFCprojectDlg::OnBnClickedButton1)
+	ON_BN_CLICKED(IDC_X1Y1_Input, &CKMSMFCprojectDlg::OnBnClickedX1y1Input)
 END_MESSAGE_MAP()
 
 
@@ -163,23 +164,35 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 
 
 
-void CKMSMFCprojectDlg::OnBnClickedButton1()
+//void CKMSMFCprojectDlg::OnBnClickedButton1()
+//{
+//	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+//	//AfxMessageBox(_T("hellow Windos"));
+//	UpdateData(true); // 수정된 값 처리
+//	
+//	int nSum = 0;
+//
+//	for (int i = 0; i < m_nNum; i++)
+//	{
+//		std::cout << i << "\n";
+//		nSum += i;
+//	}
+//
+//	//SetDlgItemText(IDC_STATIC_RESULT, _T("0"));
+//	m_nNum = nSum;
+//	UpdateData(false); // 이걸 해줘야 업데이트 됨
+//}
+
+
+
+
+
+
+void CKMSMFCprojectDlg::OnBnClickedX1y1Input()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//AfxMessageBox(_T("hellow Windos"));
 	UpdateData(true); // 수정된 값 처리
-	
-	int nSum = 0;
 
-	for (int i = 0; i < m_nNum; i++)
-	{
-		std::cout << i << "\n";
-		nSum += i;
-	}
+	std::cout << "X1 : " << m_nX1 <<", Y1 : "<< m_ny1<<"\n";
 
-	SetDlgItemText(IDC_STATIC_RESULT, _T("0"));
-	m_nNum = nSum;
-	UpdateData(false); // 이걸 해줘야 업데이트 됨
 }
-
-
