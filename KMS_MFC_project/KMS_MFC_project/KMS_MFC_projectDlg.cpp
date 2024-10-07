@@ -58,7 +58,7 @@ END_MESSAGE_MAP()
 
 CKMSMFCprojectDlg::CKMSMFCprojectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_KMS_MFC_PROJECT_DIALOG, pParent)
-	, m_nx1(0), m_ny1(0)
+	, m_nx1(0), m_ny1(0), m_nx2(0), m_ny2(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -68,6 +68,8 @@ void CKMSMFCprojectDlg::DoDataExchange(CDataExchange* pDX)
 	CDialogEx::DoDataExchange(pDX);
 	DDX_Text(pDX, IDC_x1, m_nx1);
 	DDX_Text(pDX, IDC_y1, m_ny1);
+	DDX_Text(pDX, IDC_x2, m_nx2);
+	DDX_Text(pDX, IDC_y2, m_ny2);
 }
 
 BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
@@ -76,6 +78,7 @@ BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	ON_WM_QUERYDRAGICON()
 	//ON_BN_CLICKED(IDC_BUTTON1, &CKMSMFCprojectDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_X1Y1_Input, &CKMSMFCprojectDlg::OnBnClickedX1y1Input)
+	ON_BN_CLICKED(IDC_X2Y2_Input, &CKMSMFCprojectDlg::OnBnClickedX2y2Input)
 END_MESSAGE_MAP()
 
 
@@ -193,15 +196,38 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 void CKMSMFCprojectDlg::OnBnClickedX1y1Input()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	//CClientDC dc(this);
+
 	UpdateData(true); // 수정된 값 처리
 
-	if (m_nx1 == 0)
-	{
-		//MsgBoxLog("값이 0입니다.");
-		AfxMessageBox(_T("hellow Windos"));
-	}
+	//if (m_nx1 == 0)
+	//{
+	//	//MsgBoxLog("값이 0입니다.");
+	//	AfxMessageBox(_T("hellow Windos"));
+	//}
 
 	std::cout << "X1 : " << m_nx1 <<", Y1 : "<< m_ny1<<"\n";
+
+
+
+	UpdateData(false); // 이걸 해줘야 업데이트 됨
+}
+
+
+void CKMSMFCprojectDlg::OnBnClickedX2y2Input()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(true); // 수정된 값 처리
+
+	//if (m_nx1 == 0)
+	//{
+	//	//MsgBoxLog("값이 0입니다.");
+	//	AfxMessageBox(_T("hellow Windos"));
+	//}
+
+	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
+
+
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 }

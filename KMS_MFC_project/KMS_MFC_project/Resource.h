@@ -10,6 +10,9 @@
 #define IDC_X1Y1_Input                  1005
 #define IDC_y1                          1006
 #define IDC_x1                          1007
+#define IDC_X2Y2_Input                  1008
+#define IDC_y2                          1009
+#define IDC_x2                          1010
 
 // Next default values for new objects
 // 

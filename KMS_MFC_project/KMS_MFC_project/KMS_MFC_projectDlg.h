@@ -37,8 +37,11 @@ public:
 
 	int m_nx1 = 0;
 	int m_ny1 = 0;
+	int m_nx2 = 0;
+	int m_ny2 = 0;
 
 
 	
 	afx_msg void OnBnClickedX1y1Input();
+	afx_msg void OnBnClickedX2y2Input();
 };
