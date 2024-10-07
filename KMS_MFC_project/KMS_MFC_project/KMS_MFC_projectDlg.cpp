@@ -57,7 +57,7 @@ END_MESSAGE_MAP()
 
 CKMSMFCprojectDlg::CKMSMFCprojectDlg(CWnd* pParent /*=nullptr*/)
 	: CDialogEx(IDD_KMS_MFC_PROJECT_DIALOG, pParent)
-	, m_nNum(100)
+	, m_nx1(0), m_ny1(0)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
@@ -65,7 +65,8 @@ CKMSMFCprojectDlg::CKMSMFCprojectDlg(CWnd* pParent /*=nullptr*/)
 void CKMSMFCprojectDlg::DoDataExchange(CDataExchange* pDX)
 {
 	CDialogEx::DoDataExchange(pDX);
-	//DDX_Text(pDX, IDC_EDIT_NUM, m_nNum);
+	DDX_Text(pDX, IDC_x1, m_nx1);
+	DDX_Text(pDX, IDC_y1, m_ny1);
 }
 
 BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
@@ -193,6 +194,7 @@ void CKMSMFCprojectDlg::OnBnClickedX1y1Input()
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	UpdateData(true); // 수정된 값 처리
 
-	std::cout << "X1 : " << m_nX1 <<", Y1 : "<< m_ny1<<"\n";
+	std::cout << "X1 : " << m_nx1 <<", Y1 : "<< m_ny1<<"\n";
 
+	UpdateData(false); // 이걸 해줘야 업데이트 됨
 }

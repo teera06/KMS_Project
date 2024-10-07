@@ -35,10 +35,9 @@ public:
 	//afx_msg void OnBnClickedButton1();
 	
 
-	int m_nX1 = 0;
+	int m_nx1 = 0;
 	int m_ny1 = 0;
 
-	int m_nNum=0;
 
 	
 	afx_msg void OnBnClickedX1y1Input();
