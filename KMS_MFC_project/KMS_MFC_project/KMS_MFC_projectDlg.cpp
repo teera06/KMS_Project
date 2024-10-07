@@ -79,6 +79,7 @@ BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	//ON_BN_CLICKED(IDC_BUTTON1, &CKMSMFCprojectDlg::OnBnClickedButton1)
 	ON_BN_CLICKED(IDC_X1Y1_Input, &CKMSMFCprojectDlg::OnBnClickedX1y1Input)
 	ON_BN_CLICKED(IDC_X2Y2_Input, &CKMSMFCprojectDlg::OnBnClickedX2y2Input)
+	ON_BN_CLICKED(IDC_Draw_BT, &CKMSMFCprojectDlg::OnBnClickedDrawBt)
 END_MESSAGE_MAP()
 
 
@@ -230,4 +231,31 @@ void CKMSMFCprojectDlg::OnBnClickedX2y2Input()
 
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
+}
+
+
+void CKMSMFCprojectDlg::OnBnClickedDrawBt()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	int nWidth = 640;
+	int nHeight = 480;
+	int nBpp = 8;
+
+	m_image.Create(nWidth, nHeight, nBpp);
+
+	// 기본 옵션 코드
+	if (nBpp == 8)
+	{
+		static RGBQUAD rgb[256];
+		for (int i = 0; i < 256; i++)
+		{
+			rgb[i].rgbRed = rgb[i].rgbBlue = rgb[i].rgbGreen = i;
+		}
+
+		m_image.SetColorTable(0, 256, rgb);
+	}
+
+	CClientDC dc(this);
+	m_image.Draw(dc, 350, 0);
 }

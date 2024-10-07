@@ -15,7 +15,6 @@
 #define IDC_x2                          1010
 #define IDC_Draw_BT                     1011
 #define IDC_Action_BT                   1012
-#define IDC_Action_BT2                  1013
 #define IDC_Open_BT                     1013
 
 // Next default values for new objects

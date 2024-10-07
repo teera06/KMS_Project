@@ -8,6 +8,7 @@
 // CKMSMFCprojectDlg 대화 상자
 class CKMSMFCprojectDlg : public CDialogEx
 {
+	
 // 생성입니다.
 public:
 	CKMSMFCprojectDlg(CWnd* pParent = nullptr);	// 표준 생성자입니다.
@@ -31,9 +32,8 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
-public:
-	//afx_msg void OnBnClickedButton1();
-	
+private:
+	CImage m_image;
 
 	int m_nx1 = 0;
 	int m_ny1 = 0;
@@ -44,4 +44,6 @@ public:
 	
 	afx_msg void OnBnClickedX1y1Input();
 	afx_msg void OnBnClickedX2y2Input();
+public:
+	afx_msg void OnBnClickedDrawBt();
 };
