@@ -257,5 +257,5 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	}
 
 	CClientDC dc(this);
-	m_image.Draw(dc, 350, 0);
+	m_image.Draw(dc, 0, 0);
 }
