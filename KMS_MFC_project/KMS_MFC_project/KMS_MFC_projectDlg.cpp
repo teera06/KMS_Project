@@ -255,7 +255,21 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 
 		m_image.SetColorTable(0, 256, rgb);
 	}
+	
+	int nPitch = m_image.GetPitch();
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+	// 그라데이션 표현
+	for (int i = 0; i < nHeight; i++)
+	{
+		for (int j = 0; j < nWidth; j++)
+		{
+			fm[i * nPitch + j] = i % 255;
+		}
+	}
 
 	CClientDC dc(this);
 	m_image.Draw(dc, 0, 0);
+
+	m_image.Save(_T("D:\\save.png"));
 }
