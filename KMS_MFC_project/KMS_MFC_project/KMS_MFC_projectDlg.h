@@ -21,7 +21,15 @@ public:
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
+public:
+	afx_msg void OnBnClickedX1y1Input();
+	afx_msg void OnBnClickedX2y2Input();
+	afx_msg void OnBnClickedDrawBt();
+	afx_msg void OnBnClickedActionBt();
+	afx_msg void OnBnClickedOpenBt();
 
+	void UpdateDisPlay(); // 화면 그리기 기능
+	void MoveCircle();
 // 구현입니다.
 protected:
 	HICON m_hIcon;
@@ -42,8 +50,6 @@ private:
 
 
 	
-	afx_msg void OnBnClickedX1y1Input();
-	afx_msg void OnBnClickedX2y2Input();
-public:
-	afx_msg void OnBnClickedDrawBt();
+	
+
 };

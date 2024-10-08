@@ -80,6 +80,8 @@ BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_X1Y1_Input, &CKMSMFCprojectDlg::OnBnClickedX1y1Input)
 	ON_BN_CLICKED(IDC_X2Y2_Input, &CKMSMFCprojectDlg::OnBnClickedX2y2Input)
 	ON_BN_CLICKED(IDC_Draw_BT, &CKMSMFCprojectDlg::OnBnClickedDrawBt)
+	ON_BN_CLICKED(IDC_Action_BT, &CKMSMFCprojectDlg::OnBnClickedActionBt)
+	ON_BN_CLICKED(IDC_Open_BT, &CKMSMFCprojectDlg::OnBnClickedOpenBt)
 END_MESSAGE_MAP()
 
 
@@ -170,30 +172,6 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 
 
 
-//void CKMSMFCprojectDlg::OnBnClickedButton1()
-//{
-//	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-//	//AfxMessageBox(_T("hellow Windos"));
-//	UpdateData(true); // 수정된 값 처리
-//	
-//	int nSum = 0;
-//
-//	for (int i = 0; i < m_nNum; i++)
-//	{
-//		std::cout << i << "\n";
-//		nSum += i;
-//	}
-//
-//	//SetDlgItemText(IDC_STATIC_RESULT, _T("0"));
-//	m_nNum = nSum;
-//	UpdateData(false); // 이걸 해줘야 업데이트 됨
-//}
-
-
-
-
-
-
 void CKMSMFCprojectDlg::OnBnClickedX1y1Input()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
@@ -242,7 +220,7 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	int nHeight = 480;
 	int nBpp = 8;
 
-	m_image.Create(nWidth, nHeight, nBpp);
+	m_image.Create(nWidth, -nHeight, nBpp);
 
 	// 기본 옵션 코드
 	if (nBpp == 8)
@@ -255,21 +233,84 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 
 		m_image.SetColorTable(0, 256, rgb);
 	}
-	
+
 	int nPitch = m_image.GetPitch();
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
+
+	memset(fm, 0xff, nWidth * nHeight);
 	// 그라데이션 표현
-	for (int i = 0; i < nHeight; i++)
+	//for (int i = 0; i < nHeight; i++)
+	//{
+	//	for (int j = 0; j < nWidth; j++)
+	//	{
+	//		fm[i * nPitch + j] = 0xff;
+	//	}
+	//}
+
+	UpdateDisPlay();
+
+	
+}
+
+
+void CKMSMFCprojectDlg::OnBnClickedActionBt()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	// 이미지 저장용
+	m_image.Save(_T("D:\\save.png"));
+
+	for (int i = 0; i < 100; i++)
 	{
-		for (int j = 0; j < nWidth; j++)
-		{
-			fm[i * nPitch + j] = i % 255;
-		}
+		MoveCircle();
+		Sleep(10);
+	}
+}
+
+
+
+void CKMSMFCprojectDlg::OnBnClickedOpenBt()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+
+	if (m_image != nullptr)
+	{
+		m_image.Destroy();
 	}
 
-	CClientDC dc(this);
-	m_image.Draw(dc, 0, 0);
+	UpdateDisPlay();
 
-	m_image.Save(_T("D:\\save.png"));
+
+}
+
+void CKMSMFCprojectDlg::UpdateDisPlay()
+{
+	// 화면에 그려주는 기능
+	CClientDC dc(this);
+	m_image.Draw(dc, 0, 0); // 그려주는 위치
+}
+
+void CKMSMFCprojectDlg::MoveCircle()
+{
+	int nGray = 100;
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+	int nPitch = m_image.GetPitch();
+
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+
+	memset(fm, 0xff, nWidth * nHeight);
+
+	for (int j = m_ny1; j<m_ny1+48; j++)
+	{
+		for (int i = m_nx1; i<m_nx1+64; i++)
+		{
+			fm[j * nPitch + i] = nGray;
+		}
+	}
+	m_ny1++;
+	m_nx1++;
+
+	UpdateDisPlay();
 }
