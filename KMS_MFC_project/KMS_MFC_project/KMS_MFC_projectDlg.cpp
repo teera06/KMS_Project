@@ -114,6 +114,9 @@ BOOL CKMSMFCprojectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	MoveWindow(0, 0, 1280, 720);
+	InitImage();
+	//UpdateDisPlay();
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
@@ -153,6 +156,11 @@ void CKMSMFCprojectDlg::OnPaint()
 
 		// 아이콘을 그립니다.
 		dc.DrawIcon(x, y, m_hIcon);
+
+		if (m_image)
+		{
+			m_image.Draw(dc, 0, 0);
+		}
 	}
 	else
 	{
@@ -213,23 +221,8 @@ void CKMSMFCprojectDlg::DrawCircle(unsigned char* _fm, int _x, int _y, int _radi
 	}
 }
 
-
-
-
-
-
-
-void CKMSMFCprojectDlg::OnBnClickedDrawBt()
+void CKMSMFCprojectDlg::InitImage()
 {
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	UpdateData(true); // 수정된 값 처리
-
-
-	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
-	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
-
-
-	UpdateData(false); // 이걸 해줘야 업데이트 됨
 	int nWidth = 640;
 	int nHeight = 480;
 	int nBpp = 8;
@@ -253,6 +246,35 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 
 
 	memset(fm, 0xff, nWidth * nHeight);
+}
+
+void CKMSMFCprojectDlg::ImageClear()
+{
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+	unsigned char* fm = (unsigned char*)m_image.GetBits();
+
+	memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
+}
+
+
+
+
+
+
+
+void CKMSMFCprojectDlg::OnBnClickedDrawBt()
+{
+	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(true); // 수정된 값 처리
+
+
+	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
+	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
+
+
+	UpdateData(false); // 이걸 해줘야 업데이트 됨
+	
 	// 그라데이션 표현
 	//for (int i = 0; i < nHeight; i++)
 	//{
@@ -280,8 +302,8 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
+	ImageClear();
 	m_image.Save(_T("D:\\save.png"));
-
 	while (true)
 	{
 		if (m_nx1 == m_nx2 && m_ny1 == m_ny2)
@@ -336,7 +358,18 @@ void CKMSMFCprojectDlg::MoveCircle()
 
 	//memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
 	DrawCircle(fm, m_nx1, m_ny1, nRadius, 0xff); // 그전꺼 화면을 초기화
-	DrawCircle(fm, ++m_nx1, ++m_ny1, nRadius,nGray); // 그리기
+
+	if (m_nx1 != m_nx2)
+	{
+		++m_nx1;
+	}
+
+	if (m_ny1 != m_ny2)
+	{
+		++m_ny1;
+	}
+
+	DrawCircle(fm, m_nx1, m_ny1, nRadius,nGray); // 그리기
 
 	
 	
