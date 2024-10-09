@@ -4,7 +4,7 @@
 
 #pragma once
 
-
+class CDlgImage;
 // CKMSMFCprojectDlg 대화 상자
 class CKMSMFCprojectDlg : public CDialogEx
 {
@@ -26,8 +26,8 @@ public:
 	afx_msg void OnBnClickedActionBt();
 	afx_msg void OnBnClickedOpenBt();
 
-	void UpdateDisPlay(); // 화면 그리기 기능
-	void MoveCircle();
+	//void UpdateDisPlay(); // 화면 그리기 기능
+	//void MoveCircle();
 // 구현입니다.
 protected:
 	HICON m_hIcon;
@@ -38,8 +38,10 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
+	afx_msg void OnDestroy();
 private:
-	CImage m_image;
+	//CImage m_image;
+	CDlgImage* m_pDlgImage = nullptr;
 
 	int m_nx1 = 0;
 	int m_ny1 = 0;
@@ -47,10 +49,11 @@ private:
 	int m_ny2 = 0;
 
 
-	bool ValidImgPos(int _x, int _y); // 범위 영역 확인 함수
-	bool IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius);
+	//bool ValidImgPos(int _x, int _y); // 범위 영역 확인 함수
+	/*bool IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius);
 	void DrawCircle(unsigned char* _fm, int _x, int _y, int _radius, int _Color);
 	void InitImage();
-	void ImageClear();
+	void ImageClear();*/
+
 
 };

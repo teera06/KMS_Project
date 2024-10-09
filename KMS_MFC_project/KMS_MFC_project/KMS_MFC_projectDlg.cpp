@@ -80,6 +80,7 @@ BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	ON_BN_CLICKED(IDC_Draw_BT, &CKMSMFCprojectDlg::OnBnClickedDrawBt)
 	ON_BN_CLICKED(IDC_Action_BT, &CKMSMFCprojectDlg::OnBnClickedActionBt)
 	ON_BN_CLICKED(IDC_Open_BT, &CKMSMFCprojectDlg::OnBnClickedOpenBt)
+	ON_WM_DESTROY()
 END_MESSAGE_MAP()
 
 
@@ -115,8 +116,12 @@ BOOL CKMSMFCprojectDlg::OnInitDialog()
 	SetIcon(m_hIcon, FALSE);		// 작은 아이콘을 설정합니다.
 
 	// TODO: 여기에 추가 초기화 작업을 추가합니다.
+	m_pDlgImage = new CDlgImage;
+	m_pDlgImage->Create(IDD_CDlgImage, this);
+	m_pDlgImage->ShowWindow(SW_SHOW);
+
 	MoveWindow(0, 0, 1280, 720);
-	InitImage();
+	//SInitImage();
 	//UpdateDisPlay();
 
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
@@ -158,10 +163,10 @@ void CKMSMFCprojectDlg::OnPaint()
 		// 아이콘을 그립니다.
 		dc.DrawIcon(x, y, m_hIcon);
 
-		if (m_image)
-		{
-			m_image.Draw(dc, 0, 0);
-		}
+		//if (m_image)
+		//{
+		//	m_image.Draw(dc, 0, 0);
+		//}
 	}
 	else
 	{
@@ -176,87 +181,93 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-bool CKMSMFCprojectDlg::ValidImgPos(int _x, int _y)
-{
-	
-	int nWidth = m_image.GetWidth();
-	int nHeight = m_image.GetHeight();
-
-	CRect rect(0, 0, nWidth, nHeight); // 체크 범위를 만듬
-
-	return rect.PtInRect(CPoint(_x, _y)); // 해당 범위안에 있는지 체크
-
-}
-
-bool CKMSMFCprojectDlg::IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius)
-{
-	bool bRet = false;
-
-	double dX = _x - _CenterX;
-	double dY = _y - _CenterY;
-	double dDist = dX * dX + dY * dY;
-
-	if (dDist < _radius * _radius)
-	{
-		bRet = true;
-	}
-	
-	return bRet;
-}
-
-void CKMSMFCprojectDlg::DrawCircle(unsigned char* _fm, int _x, int _y, int _radius, int _Color)
-{
-	int nCenterX = _x + _radius;
-	int nCenterY = _y + _radius;
-	int nPitch = m_image.GetPitch();
-
-	for (int j = _y; j < _y+_radius*2; j++)
-	{
-		for (int i = _x; i < _x+_radius*2; i++)
-		{
-			if (true==IsInCircle(i,j,nCenterX,nCenterY,_radius))
-			{
-				_fm[j * nPitch + i] = _Color;
-			}
-		}
-	}
-}
-
-void CKMSMFCprojectDlg::InitImage()
-{
-	int nWidth = 640;
-	int nHeight = 480;
-	int nBpp = 8;
-
-	m_image.Create(nWidth, -nHeight, nBpp);
-
-	// 기본 옵션 코드
-	if (nBpp == 8)
-	{
-		static RGBQUAD rgb[256];
-		for (int i = 0; i < 256; i++)
-		{
-			rgb[i].rgbRed = rgb[i].rgbBlue = rgb[i].rgbGreen = i;
-		}
-
-		m_image.SetColorTable(0, 256, rgb);
-	}
-
-	int nPitch = m_image.GetPitch();
-	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
 
-	memset(fm, 0xff, nWidth * nHeight);
-}
+//bool CKMSMFCprojectDlg::ValidImgPos(int _x, int _y)
+//{
+//	if (nullptr == m_pDlgImage)
+//	{
+//		return false;
+//	}
+//
+//	int nWidth = m_pDlgImage->GetCImage().GetWidth();
+//	int nHeight = m_pDlgImage->GetCImage().GetHeight();
+//
+//	CRect rect(0, 0, nWidth, nHeight); // 체크 범위를 만듬
+//
+//	return rect.PtInRect(CPoint(_x, _y)); // 해당 범위안에 있는지 체크
+//
+//}
 
-void CKMSMFCprojectDlg::ImageClear()
-{
-	int nWidth = m_image.GetWidth();
-	int nHeight = m_image.GetHeight();
-	unsigned char* fm = (unsigned char*)m_image.GetBits();
+//bool CKMSMFCprojectDlg::IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius)
+//{
+//	bool bRet = false;
+//
+//	double dX = _x - _CenterX;
+//	double dY = _y - _CenterY;
+//	double dDist = dX * dX + dY * dY;
+//
+//	if (dDist < _radius * _radius)
+//	{
+//		bRet = true;
+//	}
+//	
+//	return bRet;
+//}
+//
+//void CKMSMFCprojectDlg::DrawCircle(unsigned char* _fm, int _x, int _y, int _radius, int _Color)
+//{
+//	int nCenterX = _x + _radius;
+//	int nCenterY = _y + _radius;
+//	int nPitch = m_image.GetPitch();
+//
+//	for (int j = _y; j < _y+_radius*2; j++)
+//	{
+//		for (int i = _x; i < _x+_radius*2; i++)
+//		{
+//			if (true==IsInCircle(i,j,nCenterX,nCenterY,_radius))
+//			{
+//				_fm[j * nPitch + i] = _Color;
+//			}
+//		}
+//	}
+//}
+//
+//void CKMSMFCprojectDlg::InitImage()
+//{
+//	int nWidth = 640;
+//	int nHeight = 480;
+//	int nBpp = 8;
+//
+//	m_image.Create(nWidth, -nHeight, nBpp);
+//
+//	// 기본 옵션 코드
+//	if (nBpp == 8)
+//	{
+//		static RGBQUAD rgb[256];
+//		for (int i = 0; i < 256; i++)
+//		{
+//			rgb[i].rgbRed = rgb[i].rgbBlue = rgb[i].rgbGreen = i;
+//		}
+//
+//		m_image.SetColorTable(0, 256, rgb);
+//	}
+//
+//	int nPitch = m_image.GetPitch();
+//	unsigned char* fm = (unsigned char*)m_image.GetBits();
+//
+//
+//	memset(fm, 0xff, nWidth * nHeight);
+//}
 
-	memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
-}
+//void CKMSMFCprojectDlg::ImageClear()
+//{
+//	int nWidth = m_image.GetWidth();
+//	int nHeight = m_image.GetHeight();
+//	unsigned char* fm = (unsigned char*)m_image.GetBits();
+//
+//	memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
+//}
 
 
 
@@ -275,8 +286,11 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
-	CDlgImage dig;
-	dig.DoModal();
+	
+	if (nullptr == m_pDlgImage)
+	{
+		return;
+	}
 	// 그라데이션 표현
 	//for (int i = 0; i < nHeight; i++)
 	//{
@@ -285,8 +299,17 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	//		fm[i * nPitch + j] = 0xff;
 	//	}
 	//}
+	int nGray = 100;
+	/*int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+	int nPitch = m_image.GetPitch();*/
+	int nRadius = 20;
 
-	UpdateDisPlay();
+	//unsigned char* fm = (unsigned char*)m_image.GetBits();
+	m_pDlgImage->ImageClear();
+	m_pDlgImage->DrawCircle(m_nx1, m_ny1, nRadius, nGray);
+
+	m_pDlgImage->UpdateDisPlay();
 
 	
 }
@@ -304,8 +327,14 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
-	ImageClear();
-	m_image.Save(_T("D:\\save.png"));
+
+	if (nullptr == m_pDlgImage)
+	{
+		return;
+	}
+
+	m_pDlgImage->ImageClear();
+	//m_image.Save(_T("D:\\save.png"));
 	while (true)
 	{
 		if (m_nx1 == m_nx2 && m_ny1 == m_ny2)
@@ -313,12 +342,12 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 			break;
 		}
 
-		if (false == ValidImgPos(m_nx2, m_ny2))
+		if(false == m_pDlgImage->ValidImgPos(m_nx2, m_ny2))
 		{
 			MsgBoxLog("x2, y2 범위를 초과했습니다.");
 			break;
 		}
-		MoveCircle();
+		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2);
 		Sleep(10);
 
 	}
@@ -330,51 +359,61 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
-	if (m_image != nullptr)
+	/*if (m_image != nullptr)
 	{
 		m_image.Destroy();
-	}
+	}*/
 
-	UpdateDisPlay();
+	//UpdateDisPlay();
 
 
 }
 
-void CKMSMFCprojectDlg::UpdateDisPlay()
+//void CKMSMFCprojectDlg::UpdateDisPlay()
+//{
+//	// 화면에 그려주는 기능
+//	CClientDC dc(this);
+//	m_image.Draw(dc, 0, 0); // 그려주는 위치
+//}
+//
+//void CKMSMFCprojectDlg::MoveCircle()
+//{
+//	int nGray = 100;
+//	int nWidth = m_image.GetWidth();
+//	int nHeight = m_image.GetHeight();
+//	int nPitch = m_image.GetPitch();
+//	int nRadius = 20;
+//
+//	unsigned char* fm = (unsigned char*)m_image.GetBits();
+//
+//
+//	//memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
+//	DrawCircle(fm, m_nx1, m_ny1, nRadius, 0xff); // 그전꺼 화면을 초기화
+//
+//	if (m_nx1 != m_nx2)
+//	{
+//		++m_nx1;
+//	}
+//
+//	if (m_ny1 != m_ny2)
+//	{
+//		++m_ny1;
+//	}
+//
+//	DrawCircle(fm, m_nx1, m_ny1, nRadius,nGray); // 그리기
+//
+//	
+//	
+//
+//	UpdateDisPlay();
+//}
+
+
+void CKMSMFCprojectDlg::OnDestroy()
 {
-	// 화면에 그려주는 기능
-	CClientDC dc(this);
-	m_image.Draw(dc, 0, 0); // 그려주는 위치
-}
+	CDialogEx::OnDestroy();
 
-void CKMSMFCprojectDlg::MoveCircle()
-{
-	int nGray = 100;
-	int nWidth = m_image.GetWidth();
-	int nHeight = m_image.GetHeight();
-	int nPitch = m_image.GetPitch();
-	int nRadius = 20;
-
-	unsigned char* fm = (unsigned char*)m_image.GetBits();
-
-
-	//memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
-	DrawCircle(fm, m_nx1, m_ny1, nRadius, 0xff); // 그전꺼 화면을 초기화
-
-	if (m_nx1 != m_nx2)
-	{
-		++m_nx1;
-	}
-
-	if (m_ny1 != m_ny2)
-	{
-		++m_ny1;
-	}
-
-	DrawCircle(fm, m_nx1, m_ny1, nRadius,nGray); // 그리기
-
-	
-	
-
-	UpdateDisPlay();
+	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
+	delete m_pDlgImage;
+	m_pDlgImage = nullptr;
 }
