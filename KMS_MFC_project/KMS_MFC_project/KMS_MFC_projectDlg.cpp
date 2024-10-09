@@ -167,6 +167,52 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+bool CKMSMFCprojectDlg::ValidImgPos(int _x, int _y)
+{
+	
+	int nWidth = m_image.GetWidth();
+	int nHeight = m_image.GetHeight();
+
+	CRect rect(0, 0, nWidth, nHeight); // 체크 범위를 만듬
+
+	return rect.PtInRect(CPoint(_x, _y)); // 해당 범위안에 있는지 체크
+
+}
+
+bool CKMSMFCprojectDlg::IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius)
+{
+	bool bRet = false;
+
+	double dX = _x - _CenterX;
+	double dY = _y - _CenterY;
+	double dDist = dX * dX + dY * dY;
+
+	if (dDist < _radius * _radius)
+	{
+		bRet = true;
+	}
+	
+	return bRet;
+}
+
+void CKMSMFCprojectDlg::DrawCircle(unsigned char* _fm, int _x, int _y, int _radius, int _Color)
+{
+	int nCenterX = _x + _radius;
+	int nCenterY = _y + _radius;
+	int nPitch = m_image.GetPitch();
+
+	for (int j = _y; j < _y+_radius*2; j++)
+	{
+		for (int i = _x; i < _x+_radius*2; i++)
+		{
+			if (true==IsInCircle(i,j,nCenterX,nCenterY,_radius))
+			{
+				_fm[j * nPitch + i] = _Color;
+			}
+		}
+	}
+}
+
 
 
 
@@ -226,12 +272,26 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	// 이미지 저장용
+	UpdateData(true); // 수정된 값 처리
+
+
+	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
+	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
+
+
+	UpdateData(false); // 이걸 해줘야 업데이트 됨
 	m_image.Save(_T("D:\\save.png"));
 
 	while (true)
 	{
 		if (m_nx1 == m_nx2 && m_ny1 == m_ny2)
 		{
+			break;
+		}
+
+		if (false == ValidImgPos(m_nx2, m_ny2))
+		{
+			MsgBoxLog("x2, y2 범위를 초과했습니다.");
 			break;
 		}
 		MoveCircle();
@@ -269,19 +329,25 @@ void CKMSMFCprojectDlg::MoveCircle()
 	int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();
+	int nRadius = 10;
 
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
 
 	memset(fm, 0xff, nWidth * nHeight);
 
-	for (int j = m_ny1; j<m_ny1+48; j++)
+	DrawCircle(fm, m_nx1, m_ny1, nRadius,nGray);
+
+	/*for (int j = m_ny1; j<m_ny1+48; j++)
 	{
 		for (int i = m_nx1; i<m_nx1+64; i++)
 		{
-			fm[j * nPitch + i] = nGray;
+			if (true==ValidImgPos(i, j))
+			{
+				fm[j * nPitch + i] = nGray;
+			}
 		}
-	}
+	}*/
 	m_ny1++;
 	m_nx1++;
 
