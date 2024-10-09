@@ -22,8 +22,6 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 지원입니다.
 
 public:
-	afx_msg void OnBnClickedX1y1Input();
-	afx_msg void OnBnClickedX2y2Input();
 	afx_msg void OnBnClickedDrawBt();
 	afx_msg void OnBnClickedActionBt();
 	afx_msg void OnBnClickedOpenBt();

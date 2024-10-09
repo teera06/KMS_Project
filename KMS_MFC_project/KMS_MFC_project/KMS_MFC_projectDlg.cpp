@@ -76,9 +76,6 @@ BEGIN_MESSAGE_MAP(CKMSMFCprojectDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
-	//ON_BN_CLICKED(IDC_BUTTON1, &CKMSMFCprojectDlg::OnBnClickedButton1)
-	ON_BN_CLICKED(IDC_X1Y1_Input, &CKMSMFCprojectDlg::OnBnClickedX1y1Input)
-	ON_BN_CLICKED(IDC_X2Y2_Input, &CKMSMFCprojectDlg::OnBnClickedX2y2Input)
 	ON_BN_CLICKED(IDC_Draw_BT, &CKMSMFCprojectDlg::OnBnClickedDrawBt)
 	ON_BN_CLICKED(IDC_Action_BT, &CKMSMFCprojectDlg::OnBnClickedActionBt)
 	ON_BN_CLICKED(IDC_Open_BT, &CKMSMFCprojectDlg::OnBnClickedOpenBt)
@@ -172,50 +169,21 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 
 
 
-void CKMSMFCprojectDlg::OnBnClickedX1y1Input()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	//CClientDC dc(this);
-
-	UpdateData(true); // 수정된 값 처리
-
-	//if (m_nx1 == 0)
-	//{
-	//	//MsgBoxLog("값이 0입니다.");
-	//	AfxMessageBox(_T("hellow Windos"));
-	//}
-
-	std::cout << "X1 : " << m_nx1 <<", Y1 : "<< m_ny1<<"\n";
 
 
-
-	UpdateData(false); // 이걸 해줘야 업데이트 됨
-}
-
-
-void CKMSMFCprojectDlg::OnBnClickedX2y2Input()
-{
-	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
-	UpdateData(true); // 수정된 값 처리
-
-	//if (m_nx1 == 0)
-	//{
-	//	//MsgBoxLog("값이 0입니다.");
-	//	AfxMessageBox(_T("hellow Windos"));
-	//}
-
-	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
-
-
-
-	UpdateData(false); // 이걸 해줘야 업데이트 됨
-}
 
 
 void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
+	UpdateData(true); // 수정된 값 처리
 
+
+	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
+	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
+
+
+	UpdateData(false); // 이걸 해줘야 업데이트 됨
 	int nWidth = 640;
 	int nHeight = 480;
 	int nBpp = 8;
@@ -260,10 +228,15 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 	// 이미지 저장용
 	m_image.Save(_T("D:\\save.png"));
 
-	for (int i = 0; i < 100; i++)
+	while (true)
 	{
+		if (m_nx1 == m_nx2 && m_ny1 == m_ny2)
+		{
+			break;
+		}
 		MoveCircle();
 		Sleep(10);
+
 	}
 }
 
