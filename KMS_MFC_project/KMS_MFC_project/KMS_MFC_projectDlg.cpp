@@ -329,27 +329,17 @@ void CKMSMFCprojectDlg::MoveCircle()
 	int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();
-	int nRadius = 10;
+	int nRadius = 20;
 
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
 
-	memset(fm, 0xff, nWidth * nHeight);
+	//memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
+	DrawCircle(fm, m_nx1, m_ny1, nRadius, 0xff); // 그전꺼 화면을 초기화
+	DrawCircle(fm, ++m_nx1, ++m_ny1, nRadius,nGray); // 그리기
 
-	DrawCircle(fm, m_nx1, m_ny1, nRadius,nGray);
-
-	/*for (int j = m_ny1; j<m_ny1+48; j++)
-	{
-		for (int i = m_nx1; i<m_nx1+64; i++)
-		{
-			if (true==ValidImgPos(i, j))
-			{
-				fm[j * nPitch + i] = nGray;
-			}
-		}
-	}*/
-	m_ny1++;
-	m_nx1++;
+	
+	
 
 	UpdateDisPlay();
 }
