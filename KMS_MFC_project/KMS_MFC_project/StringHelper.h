@@ -15,6 +15,6 @@ public:
 	UStringHelper& operator=(const UStringHelper& _Other) = delete;
 	UStringHelper& operator=(UStringHelper&& _Other) noexcept = delete;
 
-	static std::string ToUpper(std::string& View);
+	static std::string ToUpper(const std::string& View);
 };
 

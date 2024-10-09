@@ -10,6 +10,7 @@
 #include <iostream>
 #include "stringHelper.h"
 #include "DebugHelper.h"
+#include "CDlgImage.h"
 
 #include "afxdialogex.h"
 
@@ -274,7 +275,8 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
-	
+	CDlgImage dig;
+	dig.DoModal();
 	// 그라데이션 표현
 	//for (int i = 0; i < nHeight; i++)
 	//{

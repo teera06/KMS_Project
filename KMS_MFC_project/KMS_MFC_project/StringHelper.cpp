@@ -9,7 +9,7 @@ UStringHelper::~UStringHelper()
 {
 }
 
-std::string UStringHelper::ToUpper(std::string& View)
+std::string UStringHelper::ToUpper(const std::string& View)
 {
 	std::string Name = View.data();
 
