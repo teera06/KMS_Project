@@ -103,13 +103,13 @@ void CDlgImage::UpdateDisPlay()
 	m_image.Draw(dc, 0, 0); // 그려주는 위치
 }
 
-void CDlgImage::MoveCircle(int& _x1, int& _y1, const int _x2, const int _y2)
+void CDlgImage::MoveCircle(int& _x1, int& _y1, const int _x2, const int _y2, const int _radius)
 {
 	int nGray = 100;
 	int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();
-	int nRadius = 20;
+	int nRadius = _radius;
 
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 

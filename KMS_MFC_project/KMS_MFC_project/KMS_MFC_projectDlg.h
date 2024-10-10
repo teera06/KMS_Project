@@ -43,6 +43,7 @@ private:
 	//CImage m_image;
 	CDlgImage* m_pDlgImage = nullptr;
 
+	int nRadius = 0;
 	int m_nx1 = 0;
 	int m_ny1 = 0;
 	int m_nx2 = 0;

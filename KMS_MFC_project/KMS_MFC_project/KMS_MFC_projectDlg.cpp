@@ -11,7 +11,7 @@
 #include "stringHelper.h"
 #include "DebugHelper.h"
 #include "CDlgImage.h"
-
+#include "RandomHelper.h"
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -303,7 +303,7 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	/*int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();*/
-	int nRadius = 20;
+	nRadius = RandomHelper::MainRandom.RandomInt(10, 150);
 
 	//unsigned char* fm = (unsigned char*)m_image.GetBits();
 	m_pDlgImage->ImageClear();
@@ -347,7 +347,7 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 			MsgBoxLog("x2, y2 범위를 초과했습니다.");
 			break;
 		}
-		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2);
+		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2, nRadius);
 		Sleep(10);
 
 	}

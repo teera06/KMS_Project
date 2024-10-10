@@ -45,6 +45,9 @@
     <ClInclude Include="CDlgImage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="RandomHelper.h">
+      <Filter>AddClass</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="KMS_MFC_project.cpp">
@@ -64,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="CDlgImage.cpp">
       <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="RandomHelper.cpp">
+      <Filter>AddClass</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
