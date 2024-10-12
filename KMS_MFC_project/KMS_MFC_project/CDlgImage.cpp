@@ -140,6 +140,17 @@ void CDlgImage::SaveImage(const CString& _path)
 	m_image.Save(_path);
 }
 
+void CDlgImage::Load(const CString& _path)
+{
+	if (nullptr != m_image)
+	{
+		m_image.Destroy();
+	}
+
+	m_image.Load(_path);
+	UpdateDisPlay();
+}
+
 bool CDlgImage::ValidImgPos(int _x, int _y)
 {
 	

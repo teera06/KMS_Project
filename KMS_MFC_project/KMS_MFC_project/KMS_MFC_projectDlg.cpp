@@ -264,6 +264,27 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 
+	//ShellExecute(NULL, _T("open"), SavePath.GetCurPath(), NULL, NULL, SW_SHOW);
+
+	static TCHAR BASED_CODE szFilter[] = _T("이미지 파일(*.BMP, *.GIF, *.JPG) | *.BMP;*.GIF;*.JPG;*.bmp;*.jpg;*.gif |모든파일(*.*)|*.*||");
+
+	CFileDialog dlg(TRUE, _T("*.bmp"), _T("image"), OFN_HIDEREADONLY, szFilter);
+
+	if (IDOK == dlg.DoModal())
+
+	{
+
+		CString pathName = dlg.GetPathName();
+
+
+
+		//MessageBox(pathName);
+	
+		
+		m_pDlgImage->Load(pathName);
+
+	}
+	//[출처] [MFC] 파일열기 대화상자(CFileDialog) | 작성자 꼬꼬꼬
 	/*if (m_image != nullptr)
 	{
 		m_image.Destroy();
