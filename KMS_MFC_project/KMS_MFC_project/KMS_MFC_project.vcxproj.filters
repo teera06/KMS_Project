@@ -16,9 +16,6 @@
     <Filter Include="AddClass">
       <UniqueIdentifier>{03401efb-ca1f-49fe-ba05-2da7deb75e98}</UniqueIdentifier>
     </Filter>
-    <Filter Include="AddClass\Debug">
-      <UniqueIdentifier>{717d0836-af20-49e8-bdd2-bc7448499af5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="AddClass\Random">
       <UniqueIdentifier>{3a21ecaa-cb6a-485b-a3bd-c76da2499051}</UniqueIdentifier>
     </Filter>
@@ -48,9 +45,6 @@
     <ClInclude Include="CDlgImage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="DebugHelper.h">
-      <Filter>AddClass\Debug</Filter>
-    </ClInclude>
     <ClInclude Include="RandomHelper.h">
       <Filter>AddClass\Random</Filter>
     </ClInclude>
@@ -70,9 +64,6 @@
     </ClCompile>
     <ClCompile Include="CDlgImage.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="DebugHelper.cpp">
-      <Filter>AddClass\Debug</Filter>
     </ClCompile>
     <ClCompile Include="RandomHelper.cpp">
       <Filter>AddClass\Random</Filter>

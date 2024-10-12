@@ -8,7 +8,6 @@
 #include "KMS_MFC_projectDlg.h"
 
 #include <iostream>
-#include "DebugHelper.h"
 #include "CDlgImage.h"
 #include "RandomHelper.h"
 
@@ -186,6 +185,11 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
 	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
 
+	if (m_nx1 > 300 || m_ny1 > 150)
+	{
+		AfxMessageBox(_T("랜덤으로 그려지는 원 크기가 범위를 벗어날 수 있습니다. 위치를 다시 선정해주세요"));
+		return;
+	}
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 	
@@ -239,7 +243,7 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 
 		if(false == m_pDlgImage->ValidImgPos(m_nx2, m_ny2))
 		{
-			MsgBoxLog("x2, y2 범위를 초과했습니다.");
+			AfxMessageBox(_T("x2, y2 범위를 초과했습니다."));
 			break;
 		}
 		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2, m_nRadius);
@@ -270,27 +274,22 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 
 	CFileDialog dlg(TRUE, _T("*.bmp"), _T("image"), OFN_HIDEREADONLY, szFilter);
 
-	if (IDOK == dlg.DoModal())
+	if (IDOK != dlg.DoModal())
 
 	{
 
-		CString pathName = dlg.GetPathName();
-
-
-
-		//MessageBox(pathName);
-	
-		
-		m_pDlgImage->Load(pathName);
-
+		AfxMessageBox(_T("파일 탐색기 열기 실패"));
+		return;
 	}
-	//[출처] [MFC] 파일열기 대화상자(CFileDialog) | 작성자 꼬꼬꼬
-	/*if (m_image != nullptr)
-	{
-		m_image.Destroy();
-	}*/
+	
+	CString pathName = dlg.GetPathName();
+	int nCenterX = 0;
+	int nCenterY = 0;
 
-	//UpdateDisPlay();
+	m_pDlgImage->Load(pathName);
+	if (m_pDlgImage->FindCircleCenter(nCenterX, nCenterY)) {
+		m_pDlgImage->LoadImageEdit(nCenterX, nCenterY);
+	}
 
 
 }

@@ -24,7 +24,10 @@ public:
 	void MoveCircle(int& _x1, int& _y1, const int _x2, const int _y2, const int _radius);
 	void SaveImage(const CString& _path);
 	void Load(const CString& _path);
+	void LoadImageEdit(int x, int y);
+
 	bool ValidImgPos(int _x, int _y);
+	bool FindCircleCenter(int& centerX, int& centerY);
 	
 	CImage GetCImage()
 	{
@@ -38,7 +41,9 @@ protected:
 private:
 	CWnd* m_pParent=nullptr;
 	CImage m_image;
+	CImage m_imgFile;
 
+	int n_mradius = 0;
 	bool m_ImageLoadCheck = false;
 
 	void InitImage();
