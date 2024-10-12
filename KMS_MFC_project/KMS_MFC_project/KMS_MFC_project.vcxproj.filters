@@ -45,9 +45,6 @@
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="StringHelper.h">
-      <Filter>AddClass</Filter>
-    </ClInclude>
     <ClInclude Include="CDlgImage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -70,9 +67,6 @@
     </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="StringHelper.cpp">
-      <Filter>AddClass</Filter>
     </ClCompile>
     <ClCompile Include="CDlgImage.cpp">
       <Filter>소스 파일</Filter>

@@ -5,7 +5,7 @@ public:
 	CPathHelper();
 	~CPathHelper();
 
-
+	void MoveToSearchChild(const CString& _path);
 
 	void test()
 	{
