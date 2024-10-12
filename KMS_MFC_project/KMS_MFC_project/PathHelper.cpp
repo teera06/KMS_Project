@@ -4,8 +4,8 @@
 
 CPathHelper::CPathHelper()
 {
-	TCHAR CurPath[100];
-	GetModuleFileName(nullptr, CurPath, 100);
+	TCHAR CurPath[255]; // 혹시 모르니
+	GetModuleFileName(nullptr, CurPath, 255);
 	Path = CurPath;
 	Path = Path.Left(Path.ReverseFind('\\'));
 }
