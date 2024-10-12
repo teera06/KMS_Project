@@ -26,8 +26,18 @@ public:
 	void Load(const CString& _path);
 	void LoadImageEdit(int x, int y);
 
+	bool GetAreaCheck()
+	{
+		return AreaCheck;
+	}
+
+	void SetAreaCheck(bool _AreaCheck)
+	{
+		AreaCheck = _AreaCheck;
+	}
+
 	bool ValidImgPos(int _x, int _y);
-	bool FindCircleCenter(int& centerX, int& centerY);
+	bool CenterXYCheck(int& centerX, int& centerY);
 	
 	CImage GetCImage()
 	{
@@ -43,8 +53,9 @@ private:
 	CImage m_image;
 	CImage m_imgFile;
 
-	int n_mradius = 0;
+	int m_nGray = 100;
 	bool m_ImageLoadCheck = false;
+	bool AreaCheck = false;
 
 	void InitImage();
 	bool IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius);

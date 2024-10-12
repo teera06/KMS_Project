@@ -56,11 +56,6 @@ private:
 
 	CString GetImageName();
 
-	//bool ValidImgPos(int _x, int _y); // 범위 영역 확인 함수
-	/*bool IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius);
-	void DrawCircle(unsigned char* _fm, int _x, int _y, int _radius, int _Color);
-	void InitImage();
-	void ImageClear();*/
 
 
 };

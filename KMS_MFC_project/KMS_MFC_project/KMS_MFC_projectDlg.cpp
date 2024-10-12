@@ -185,11 +185,11 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
 	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
 
-	if (m_nx1 > 300 || m_ny1 > 150)
+	/*if (m_nx1 > 300 || m_ny1 > 150 || m_nx2 > 639 || m_ny2 > 150)
 	{
 		AfxMessageBox(_T("랜덤으로 그려지는 원 크기가 범위를 벗어날 수 있습니다. 위치를 다시 선정해주세요"));
 		return;
-	}
+	}*/
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 	
@@ -201,7 +201,7 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	int nGray = 100;
 	
 	m_nRadius = CRandomHelper::MainRandom.RandomInt(10, 150);
-
+	std::cout << "반지름 : "<<m_nRadius<<"\n";
 	//unsigned char* fm = (unsigned char*)m_image.GetBits();
 	m_pDlgImage->ImageClear();
 	m_pDlgImage->DrawCircle(m_nx1, m_ny1, m_nRadius, nGray);
@@ -221,7 +221,11 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 
 	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
 	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
-
+	/*if (m_nx1 > 300 || m_ny1 > 150 || m_nx2 > 639 || m_ny2 > 150)
+	{
+		AfxMessageBox(_T("랜덤으로 그려지는 원 크기가 범위를 벗어날 수 있습니다. 위치를 다시 선정해주세요"));
+		return;
+	}*/
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 
@@ -229,6 +233,7 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 	{
 		return;
 	}
+	std::cout << "반지름 : " << m_nRadius << "\n";
 
 	m_pDlgImage->ImageClear();
 	CString Result = SavePath.GetCurPath();
@@ -246,7 +251,17 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 			AfxMessageBox(_T("x2, y2 범위를 초과했습니다."));
 			break;
 		}
+
+		
+
+		if (true == m_pDlgImage->GetAreaCheck())
+		{
+			m_pDlgImage->SetAreaCheck(false);
+			break;
+		}
+
 		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2, m_nRadius);
+
 		Sleep(10);
 
 		if (m_nImageCount % 2 == 0) // 이미지가 너무 많이 저장되서 절반으로 줄임
@@ -283,11 +298,13 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 	}
 	
 	CString pathName = dlg.GetPathName();
+
 	int nCenterX = 0;
 	int nCenterY = 0;
 
 	m_pDlgImage->Load(pathName);
-	if (m_pDlgImage->FindCircleCenter(nCenterX, nCenterY)) {
+	if (m_pDlgImage->CenterXYCheck(nCenterX, nCenterY))
+	{
 		m_pDlgImage->LoadImageEdit(nCenterX, nCenterY);
 	}
 

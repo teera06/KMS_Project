@@ -81,6 +81,17 @@ void CDlgImage::DrawCircle(int _x, int _y, int _radius, int _Color)
 	{
 		for (int i = _x; i < _x + _radius * 2; i++)
 		{
+			if (i == m_image.GetWidth())
+			{
+				break;
+			}
+
+			if (j == m_image.GetHeight())
+			{
+				AreaCheck = true;
+				return;
+			}
+
 			if (true == IsInCircle(i, j, nCenterX, nCenterY, _radius))
 			{
 				fm[j * nPitch + i] = _Color;
@@ -117,29 +128,47 @@ void CDlgImage::UpdateDisPlay()
 
 void CDlgImage::MoveCircle(int& _x1, int& _y1, const int _x2, const int _y2, const int _radius)
 {
-	int nGray = 100;
 	int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();
-	n_mradius = _radius;
 
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
 
 	//memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
-	DrawCircle(_x1, _y1, n_mradius, 0xff); // 그전꺼 화면을 초기화
+	DrawCircle(_x1, _y1, _radius, 0xff); // 그전꺼 화면을 초기화
 
 	if (_x1 != _x2)
 	{
-		++_x1;
+		if (_x1 > _x2)
+		{
+			--_x1;
+		}
+		else if (_x1 < _x2)
+		{
+			++_x1;
+		}
 	}
+
 
 	if (_y1 != _y2)
 	{
-		++_y1;
+		if (_y1 > _y2)
+		{
+			--_y1;
+		}
+		else if (_y1 < _y2)
+		{
+			++_y1;
+		}
 	}
 
-	DrawCircle(_x1, _y1, n_mradius, nGray); // 그리기
+	if (true == AreaCheck)
+	{
+		return;
+	}
+
+	DrawCircle(_x1, _y1, _radius, m_nGray); // 그리기
 
 
 
@@ -166,27 +195,27 @@ void CDlgImage::Load(const CString& _path)
 
 void CDlgImage::LoadImageEdit(int x, int y)
 {
-	// 이미지 위에 X 그리기
+	
 	CClientDC dc(this);
 
 	// X 모양의 선 길이와 두께 설정
-	int lineLength = 5;  // X의 선 길이
-	int thickness = 2;    // 선의 두께
+	int Len = 5;  // X의 선 길이
+	int Area = 2;    // 선의 두께
 
 	// 빨간색 X를 그리기 위한 펜 설정
-	CPen pen(PS_SOLID, thickness, RGB(255, 0, 0));  // 빨간색 선
+	CPen pen(PS_SOLID, Area, RGB(255, 0, 255));  
 	CPen* pOldPen = dc.SelectObject(&pen);
 
 	// X 모양의 대각선 그리기
-	dc.MoveTo(x - lineLength, y - lineLength);
-	dc.LineTo(x + lineLength, y + lineLength);
+	dc.MoveTo(x - Len, y - Len);
+	dc.LineTo(x + Len, y + Len);
 
-	dc.MoveTo(x - lineLength, y + lineLength);
-	dc.LineTo(x + lineLength, y - lineLength);
+	dc.MoveTo(x - Len, y + Len);
+	dc.LineTo(x + Len, y - Len);
 
-	CString strText;
-	strText.Format(_T("(%d, %d)"), x, y);
-	dc.TextOut(x + 10, y, strText);
+	CString Text;
+	Text.Format(_T("(%d, %d)"), x, y);
+	dc.TextOut(x-30, y+10, Text);
 
 	// 원래 펜으로 복원
 	dc.SelectObject(pOldPen);
@@ -204,7 +233,7 @@ bool CDlgImage::ValidImgPos(int _x, int _y)
 	return rect.PtInRect(CPoint(_x, _y)); // 해당 범위안에 있는지 체크
 }
 
-bool CDlgImage::FindCircleCenter(int& centerX, int& centerY)
+bool CDlgImage::CenterXYCheck(int& centerX, int& centerY)
 {
 	int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
@@ -213,27 +242,29 @@ bool CDlgImage::FindCircleCenter(int& centerX, int& centerY)
 
 	unsigned char* fm = (unsigned char*)m_image.GetBits();
 
-	int pixelCount = 0;  // 원의 픽셀 수
-	int sumX = 0;
-	int sumY = 0;  // 원 픽셀의 x, y 좌표 합
+	int nCount = 0;  // 원의 픽셀 수
+	int nSumX = 0;
+	int nSumY = 0;  // 원 픽셀의 x, y 좌표 합
 
-	if (bpp == 8) {  // 8비트 회색조 이미지
+	if (bpp == 8) {  
 		for (int y = 0; y < nHeight; y++) {
 			for (int x = 0; x < nWidth; x++) {
 				int pixelValue = fm[y * nPitch + x];
 
-				if (pixelValue >= 50 && pixelValue <= 150) {  // 회색 픽셀 범위 조정
-					sumX += x;
-					sumY += y;
-					pixelCount++;
+				if (pixelValue == m_nGray) 
+				{  // 회색 픽셀 범위 조정
+					nSumX += x;
+					nSumY += y;
+					nCount++;
 				}
 			}
 		}
 	}
 
-	if (pixelCount > 0) {
-		centerX = sumX / pixelCount;
-		centerY = sumY / pixelCount;
+	if (nCount > 0)
+	{
+		centerX = nSumX / nCount;
+		centerY = nSumY / nCount;
 		return true;  // 중심 찾기 성공
 	}
 
