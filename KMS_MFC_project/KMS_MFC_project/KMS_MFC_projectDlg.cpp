@@ -304,9 +304,15 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 	int nCenterY = 0;
 
 	m_pDlgImage->Load(pathName);
-	if (m_pDlgImage->CenterXYCheck(nCenterX, nCenterY))
+
+	if (true==m_pDlgImage->CenterXYCheck(nCenterX, nCenterY))
 	{
 		m_pDlgImage->LoadImageEdit(nCenterX, nCenterY);
+	}
+	else
+	{
+		AfxMessageBox(_T("로드한 이미지에서 원 센터를 발견하지 못했습니다."));
+		return;
 	}
 
 
