@@ -38,6 +38,9 @@ protected:
 private:
 	CWnd* m_pParent=nullptr;
 	CImage m_image;
+
+	bool m_ImageLoadCheck = false;
+
 	void InitImage();
 	bool IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius);
 	

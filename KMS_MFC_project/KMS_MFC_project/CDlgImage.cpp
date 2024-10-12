@@ -90,11 +90,22 @@ void CDlgImage::DrawCircle(int _x, int _y, int _radius, int _Color)
 
 void CDlgImage::ImageClear()
 {
-	int nWidth = m_image.GetWidth();
-	int nHeight = m_image.GetHeight();
-	unsigned char* fm = (unsigned char*)m_image.GetBits();
+	if (true == m_ImageLoadCheck)
+	{
+		m_image.Destroy();
+		m_ImageLoadCheck=false;
+		InitImage();
+		//UpdateDisPlay();
+	}
+	else
+	{
+		int nWidth = m_image.GetWidth();
+		int nHeight = m_image.GetHeight();
+		unsigned char* fm = (unsigned char*)m_image.GetBits();
 
-	memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
+		memset(fm, 0xff, nWidth * nHeight); // 전체를 초기화 하는 방법이라 부담이 큼
+
+	}
 }
 
 void CDlgImage::UpdateDisPlay()
@@ -149,6 +160,7 @@ void CDlgImage::Load(const CString& _path)
 
 	m_image.Load(_path);
 	UpdateDisPlay();
+	m_ImageLoadCheck = true;
 }
 
 bool CDlgImage::ValidImgPos(int _x, int _y)
