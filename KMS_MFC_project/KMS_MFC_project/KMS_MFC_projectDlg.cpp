@@ -185,11 +185,11 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
 	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
 
-	/*if (m_nx1 > 300 || m_ny1 > 150 || m_nx2 > 639 || m_ny2 > 150)
+	if (m_nx1 > 300 || m_ny1 > 150 || m_nx2 > 500 || m_ny2 > 330)
 	{
 		AfxMessageBox(_T("랜덤으로 그려지는 원 크기가 범위를 벗어날 수 있습니다. 위치를 다시 선정해주세요"));
 		return;
-	}*/
+	}
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 	
@@ -221,11 +221,12 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 
 	std::cout << "X1 : " << m_nx1 << ", Y1 : " << m_ny1 << "\n";
 	std::cout << "X2 : " << m_nx2 << ", Y2 : " << m_ny2 << "\n";
-	/*if (m_nx1 > 300 || m_ny1 > 150 || m_nx2 > 639 || m_ny2 > 150)
+
+	if (m_nx1 > 300 || m_ny1 > 150 || m_nx2 > 500 || m_ny2 > 330)
 	{
 		AfxMessageBox(_T("랜덤으로 그려지는 원 크기가 범위를 벗어날 수 있습니다. 위치를 다시 선정해주세요"));
 		return;
-	}*/
+	}
 
 	UpdateData(false); // 이걸 해줘야 업데이트 됨
 
