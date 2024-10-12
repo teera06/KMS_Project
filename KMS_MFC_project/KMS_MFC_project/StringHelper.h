@@ -2,18 +2,18 @@
 
 #include <string>
 
-class UStringHelper
+class CStringHelper
 {
 public:
 	// constrcuter destructer
-	UStringHelper();
-	~UStringHelper();
+	CStringHelper();
+	~CStringHelper();
 
 	// delete Function
-	UStringHelper(const UStringHelper& _Other) = delete;
-	UStringHelper(UStringHelper&& _Other) noexcept = delete;
-	UStringHelper& operator=(const UStringHelper& _Other) = delete;
-	UStringHelper& operator=(UStringHelper&& _Other) noexcept = delete;
+	CStringHelper(const CStringHelper& _Other) = delete;
+	CStringHelper(CStringHelper&& _Other) noexcept = delete;
+	CStringHelper& operator=(const CStringHelper& _Other) = delete;
+	CStringHelper& operator=(CStringHelper&& _Other) noexcept = delete;
 
 	static std::string ToUpper(const std::string& View);
 };

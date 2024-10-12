@@ -1,12 +1,12 @@
 #include "pch.h"
 #include "RandomHelper.h"
 
-RandomHelper RandomHelper::MainRandom;
+CRandomHelper CRandomHelper::MainRandom;
 
-RandomHelper::RandomHelper()
+CRandomHelper::CRandomHelper()
 {
 }
 
-RandomHelper::~RandomHelper()
+CRandomHelper::~CRandomHelper()
 {
 }

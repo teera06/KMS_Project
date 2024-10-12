@@ -2,20 +2,20 @@
 #include <random>
 #include <time.h>
 
-class RandomHelper
+class CRandomHelper
 {
 public:
-	static RandomHelper MainRandom;
+	static CRandomHelper MainRandom;
 
 	// constrcuter destructer
-	RandomHelper();
-	~RandomHelper();
+	CRandomHelper();
+	~CRandomHelper();
 
 	// delete Function
-	RandomHelper(const RandomHelper& _Other) = delete;
-	RandomHelper(RandomHelper&& _Other) noexcept = delete;
-	RandomHelper& operator=(const RandomHelper& _Other) = delete;
-	RandomHelper& operator=(RandomHelper&& _Other) noexcept = delete;
+	CRandomHelper(const CRandomHelper& _Other) = delete;
+	CRandomHelper(CRandomHelper&& _Other) noexcept = delete;
+	CRandomHelper& operator=(const CRandomHelper& _Other) = delete;
+	CRandomHelper& operator=(CRandomHelper&& _Other) noexcept = delete;
 
 	int RandomInt(int _Min, int _Max)
 	{

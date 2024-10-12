@@ -1,15 +1,15 @@
 #include "pch.h"
 #include "StringHelper.h"
 
-UStringHelper::UStringHelper()
+CStringHelper::CStringHelper()
 {
 }
 
-UStringHelper::~UStringHelper()
+CStringHelper::~CStringHelper()
 {
 }
 
-std::string UStringHelper::ToUpper(const std::string& View)
+std::string CStringHelper::ToUpper(const std::string& View)
 {
 	std::string Name = View.data();
 
@@ -18,5 +18,6 @@ std::string UStringHelper::ToUpper(const std::string& View)
 		_Ch = std::toupper(_Ch);
 	}
 
+	//CString a(Name.c_str());
 	return Name;
 }

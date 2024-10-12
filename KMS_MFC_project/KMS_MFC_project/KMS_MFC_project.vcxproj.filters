@@ -16,6 +16,15 @@
     <Filter Include="AddClass">
       <UniqueIdentifier>{03401efb-ca1f-49fe-ba05-2da7deb75e98}</UniqueIdentifier>
     </Filter>
+    <Filter Include="AddClass\Debug">
+      <UniqueIdentifier>{717d0836-af20-49e8-bdd2-bc7448499af5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AddClass\Random">
+      <UniqueIdentifier>{3a21ecaa-cb6a-485b-a3bd-c76da2499051}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="AddClass\IO">
+      <UniqueIdentifier>{0765d0e5-c6a7-4693-8ed8-72a3b8f7f27f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="KMS_MFC_project.h">
@@ -39,14 +48,17 @@
     <ClInclude Include="StringHelper.h">
       <Filter>AddClass</Filter>
     </ClInclude>
-    <ClInclude Include="DebugHelper.h">
-      <Filter>AddClass</Filter>
-    </ClInclude>
     <ClInclude Include="CDlgImage.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="DebugHelper.h">
+      <Filter>AddClass\Debug</Filter>
+    </ClInclude>
     <ClInclude Include="RandomHelper.h">
-      <Filter>AddClass</Filter>
+      <Filter>AddClass\Random</Filter>
+    </ClInclude>
+    <ClInclude Include="PathHelper.h">
+      <Filter>AddClass\IO</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -62,14 +74,17 @@
     <ClCompile Include="StringHelper.cpp">
       <Filter>AddClass</Filter>
     </ClCompile>
-    <ClCompile Include="DebugHelper.cpp">
-      <Filter>AddClass</Filter>
-    </ClCompile>
     <ClCompile Include="CDlgImage.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="DebugHelper.cpp">
+      <Filter>AddClass\Debug</Filter>
+    </ClCompile>
     <ClCompile Include="RandomHelper.cpp">
-      <Filter>AddClass</Filter>
+      <Filter>AddClass\Random</Filter>
+    </ClCompile>
+    <ClCompile Include="PathHelper.cpp">
+      <Filter>AddClass\IO</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

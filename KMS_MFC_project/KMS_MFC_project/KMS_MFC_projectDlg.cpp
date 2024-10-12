@@ -12,6 +12,8 @@
 #include "DebugHelper.h"
 #include "CDlgImage.h"
 #include "RandomHelper.h"
+#include "PathHelper.h"
+
 #include "afxdialogex.h"
 
 #ifdef _DEBUG
@@ -277,6 +279,10 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 
 void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 {
+	//PathHelper pp;
+	CPathHelper pp;
+	pp.test();
+	
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	UpdateData(true); // 수정된 값 처리
 
@@ -303,7 +309,7 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	/*int nWidth = m_image.GetWidth();
 	int nHeight = m_image.GetHeight();
 	int nPitch = m_image.GetPitch();*/
-	nRadius = RandomHelper::MainRandom.RandomInt(10, 150);
+	nRadius = CRandomHelper::MainRandom.RandomInt(10, 150);
 
 	//unsigned char* fm = (unsigned char*)m_image.GetBits();
 	m_pDlgImage->ImageClear();
