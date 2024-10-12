@@ -291,10 +291,7 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 	CFileDialog dlg(TRUE, _T("*.bmp"), _T("CreateImage"), OFN_HIDEREADONLY, szFilter);
 
 	if (IDOK != dlg.DoModal())
-
 	{
-
-		AfxMessageBox(_T("파일 탐색기 열기 실패"));
 		return;
 	}
 	
