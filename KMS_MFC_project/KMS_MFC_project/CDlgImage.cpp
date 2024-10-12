@@ -214,7 +214,7 @@ void CDlgImage::LoadImageEdit(int x, int y)
 	dc.LineTo(x + Len, y - Len);
 
 	CString Text;
-	Text.Format(_T("(%d, %d)"), x, y);
+	Text.Format(_T("(X : %d, Y : %d)"), x, y);
 	dc.TextOut(x-30, y+10, Text);
 
 	// 원래 펜으로 복원
