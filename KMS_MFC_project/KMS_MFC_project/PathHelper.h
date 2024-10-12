@@ -9,6 +9,11 @@ public:
 
 	void Move(const CString& _path);
 
+	CString GetCurPath() 
+	{
+		return Path;
+	}
+
 	void test()
 	{
 		AfxMessageBox(Path);

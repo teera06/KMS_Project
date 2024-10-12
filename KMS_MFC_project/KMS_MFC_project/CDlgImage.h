@@ -22,6 +22,7 @@ public:
 	void ImageClear();
 	void UpdateDisPlay();
 	void MoveCircle(int& _x1, int& _y1, const int _x2, const int _y2, const int _radius);
+	void SaveImage(const CString& _path);
 	bool ValidImgPos(int _x, int _y);
 	
 	CImage GetCImage()

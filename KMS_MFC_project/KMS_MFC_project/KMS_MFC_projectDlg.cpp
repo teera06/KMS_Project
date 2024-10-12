@@ -11,7 +11,7 @@
 #include "DebugHelper.h"
 #include "CDlgImage.h"
 #include "RandomHelper.h"
-#include "PathHelper.h"
+
 
 #include "afxdialogex.h"
 
@@ -122,7 +122,7 @@ BOOL CKMSMFCprojectDlg::OnInitDialog()
 	m_pDlgImage->ShowWindow(SW_SHOW);
 
 	MoveWindow(0, 0, 1280, 720);
-
+	InitSavePath();
 	return TRUE;  // 포커스를 컨트롤에 설정하지 않으면 TRUE를 반환합니다.
 }
 
@@ -179,13 +179,6 @@ HCURSOR CKMSMFCprojectDlg::OnQueryDragIcon()
 
 void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 {
-	//PathHelper pp;
-	CPathHelper pp;
-	
-	pp.MoveToSearchChild(_T("KMS_MFC_project"));
-	pp.Move(_T("KMS_MFC_project"));
-	pp.Move(_T("res"));
-	pp.test();
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	UpdateData(true); // 수정된 값 처리
 
@@ -203,11 +196,11 @@ void CKMSMFCprojectDlg::OnBnClickedDrawBt()
 	
 	int nGray = 100;
 	
-	nRadius = CRandomHelper::MainRandom.RandomInt(10, 150);
+	m_nRadius = CRandomHelper::MainRandom.RandomInt(10, 150);
 
 	//unsigned char* fm = (unsigned char*)m_image.GetBits();
 	m_pDlgImage->ImageClear();
-	m_pDlgImage->DrawCircle(m_nx1, m_ny1, nRadius, nGray);
+	m_pDlgImage->DrawCircle(m_nx1, m_ny1, m_nRadius, nGray);
 
 	m_pDlgImage->UpdateDisPlay();
 
@@ -234,6 +227,8 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 	}
 
 	m_pDlgImage->ImageClear();
+	CString Result = SavePath.GetCurPath();
+	
 	//m_image.Save(_T("D:\\save.png"));
 	while (true)
 	{
@@ -247,9 +242,19 @@ void CKMSMFCprojectDlg::OnBnClickedActionBt()
 			MsgBoxLog("x2, y2 범위를 초과했습니다.");
 			break;
 		}
-		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2, nRadius);
+		m_pDlgImage->MoveCircle(m_nx1, m_ny1, m_nx2, m_ny2, m_nRadius);
 		Sleep(10);
 
+		if (m_nImageCount % 2 == 0) // 이미지가 너무 많이 저장되서 절반으로 줄임
+		{
+			m_pDlgImage->SaveImage(GetImageName());
+			++m_nImageCount;
+		}
+		else
+		{
+			++m_nImageCount;
+		}
+		//m_pDlgImage->SaveImage(GetImageName());
 	}
 }
 
@@ -277,4 +282,18 @@ void CKMSMFCprojectDlg::OnDestroy()
 	// TODO: 여기에 메시지 처리기 코드를 추가합니다.
 	delete m_pDlgImage;
 	m_pDlgImage = nullptr;
+}
+
+void CKMSMFCprojectDlg::InitSavePath()
+{
+	SavePath.MoveToSearchChild(_T("KMS_MFC_project"));
+	SavePath.Move(_T("CreateImage"));
+}
+
+CString CKMSMFCprojectDlg::GetImageName()
+{
+	CString Result;
+	Result.Format(_T("\\SaveImage%d.bmp"),m_nImageCount);
+	Result = SavePath.GetCurPath() + Result;
+	return Result;
 }

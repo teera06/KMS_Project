@@ -3,8 +3,10 @@
 //
 
 #pragma once
+#include "PathHelper.h"
 
 class CDlgImage;
+
 // CKMSMFCprojectDlg 대화 상자
 class CKMSMFCprojectDlg : public CDialogEx
 {
@@ -42,13 +44,17 @@ protected:
 private:
 	//CImage m_image;
 	CDlgImage* m_pDlgImage = nullptr;
-
-	int nRadius = 0;
+	CPathHelper SavePath;
+	int m_nRadius = 0;
 	int m_nx1 = 0;
 	int m_ny1 = 0;
 	int m_nx2 = 0;
 	int m_ny2 = 0;
 
+	int m_nImageCount = 0;
+	void InitSavePath();
+
+	CString GetImageName();
 
 	//bool ValidImgPos(int _x, int _y); // 범위 영역 확인 함수
 	/*bool IsInCircle(int _x, int _y, int _CenterX, int _CenterY, int _radius);

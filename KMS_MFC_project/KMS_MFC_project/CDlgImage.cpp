@@ -135,6 +135,11 @@ void CDlgImage::MoveCircle(int& _x1, int& _y1, const int _x2, const int _y2, con
 	UpdateDisPlay();
 }
 
+void CDlgImage::SaveImage(const CString& _path)
+{
+	m_image.Save(_path);
+}
+
 bool CDlgImage::ValidImgPos(int _x, int _y)
 {
 	
