@@ -37,3 +37,9 @@ void CPathHelper::MoveToSearchChild(const CString& _path)
 		}
 	}
 }
+
+void CPathHelper::Move(const CString& _path)
+{
+	Path += "\\";
+	Path += _path;
+}

@@ -7,6 +7,8 @@ public:
 
 	void MoveToSearchChild(const CString& _path);
 
+	void Move(const CString& _path);
+
 	void test()
 	{
 		AfxMessageBox(Path);
