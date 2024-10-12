@@ -288,7 +288,7 @@ void CKMSMFCprojectDlg::OnBnClickedOpenBt()
 
 	static TCHAR BASED_CODE szFilter[] = _T("이미지 파일(*.BMP, *.GIF, *.JPG) | *.BMP;*.GIF;*.JPG;*.bmp;*.jpg;*.gif |모든파일(*.*)|*.*||");
 
-	CFileDialog dlg(TRUE, _T("*.bmp"), _T("image"), OFN_HIDEREADONLY, szFilter);
+	CFileDialog dlg(TRUE, _T("*.bmp"), _T("CreateImage"), OFN_HIDEREADONLY, szFilter);
 
 	if (IDOK != dlg.DoModal())
 
